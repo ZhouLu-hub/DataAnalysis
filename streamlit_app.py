@@ -492,10 +492,7 @@ def show_user_analysis():
 
     with col2:
         st.markdown("### 用户城市分布详情")
-        st.dataframe(
-            city_user_counts.style.background_gradient(cmap="Viridis", subset=["用户数"]),
-            width='stretch', height=500,
-        )
+        st.dataframe(city_user_counts, width='stretch', height=500)
 
     st.markdown("<div class='section-title'>📈 用户行为相关性</div>", unsafe_allow_html=True)
     user_sample = user_agg.sample(n=min(2000, len(user_agg)), random_state=42)
@@ -1029,8 +1026,7 @@ def show_data_explorer():
     display_df = filtered.sample(n=min(rows_to_show, len(filtered)), random_state=42)
     st.dataframe(
         display_df[["uid", "user_city", "item_id", "author_id", "item_city",
-                     "like", "finish", "duration_time", "date", "H"]]
-        .style.background_gradient(cmap="Viridis", subset=["like", "finish", "duration_time"]),
+                     "like", "finish", "duration_time", "date", "H"]],
         width='stretch', height=500,
     )
 
@@ -1039,7 +1035,7 @@ def show_data_explorer():
     with col1:
         st.markdown("### 数值字段描述统计")
         desc_stats = filtered.describe()
-        st.dataframe(desc_stats.style.background_gradient(cmap="Blues"), width='stretch')
+        st.dataframe(desc_stats, width='stretch')
     with col2:
         st.markdown("### 缺失值检查")
         missing = pd.DataFrame({
@@ -1048,10 +1044,7 @@ def show_data_explorer():
             "缺失数": filtered.isnull().sum().values,
             "缺失率(%)": (filtered.isnull().sum() / len(filtered) * 100).round(2).values,
         })
-        st.dataframe(
-            missing.style.background_gradient(cmap="Reds", subset=["缺失率(%)"]),
-            width='stretch',
-        )
+        st.dataframe(missing, width='stretch')
 
     st.markdown("<div class='section-title'>📈 数据相关性热力图</div>", unsafe_allow_html=True)
     numeric_cols = ["like", "finish", "duration_time"]
