@@ -218,7 +218,7 @@ def show_overview():
             template="plotly_dark", color_discrete_sequence=["#FF6B6B"],
         )
         fig.update_layout(hovermode="x unified")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab2:
         fig = px.line(
@@ -228,7 +228,7 @@ def show_overview():
             template="plotly_dark", color_discrete_sequence=["#FFE66D"],
         )
         fig.update_layout(hovermode="x unified")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab3:
         fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -248,7 +248,7 @@ def show_overview():
         )
         fig.update_yaxes(title_text="独立用户", secondary_y=False)
         fig.update_yaxes(title_text="独立作者", secondary_y=True)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     col1, col2 = st.columns(2)
     with col1:
@@ -263,7 +263,7 @@ def show_overview():
         )
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(showlegend=False, height=450, xaxis=dict(showgrid=False))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         st.markdown("<div class='section-title'>🎵 作品城市分布 Top15</div>", unsafe_allow_html=True)
@@ -277,7 +277,7 @@ def show_overview():
         )
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(showlegend=False, height=450, xaxis=dict(showgrid=False))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     col1, col2 = st.columns(2)
     with col1:
@@ -291,7 +291,7 @@ def show_overview():
             color="count", color_continuous_scale="Reds",
         )
         fig.update_layout(showlegend=False, height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         st.markdown("<div class='section-title'>📊 渠道分布</div>", unsafe_allow_html=True)
@@ -305,7 +305,7 @@ def show_overview():
         )
         fig.update_traces(textposition="inside", textinfo="percent+label")
         fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>💡 数据洞察</div>", unsafe_allow_html=True)
     total_likes = data["like"].sum()
@@ -369,7 +369,7 @@ def show_user_analysis():
             color_discrete_sequence=["#4ECDC4"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         p99 = user_agg["浏览作品数"].quantile(0.99)
         st.markdown(
             f"<div class='insight-box'>💡 99% 的用户浏览作品数不超过 {int(p99)} 个，"
@@ -387,7 +387,7 @@ def show_user_analysis():
             color_discrete_sequence=["#FFE66D"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         like_rate_users = (user_agg["总点赞数"] > 0).sum() / len(user_agg) * 100
         st.markdown(
             f"<div class='insight-box'>💡 {like_rate_users:.1f}% 的用户有过点赞行为，"
@@ -404,7 +404,7 @@ def show_user_analysis():
             color_discrete_sequence=["#FF6B6B"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         finish_rate_users = (user_agg["观看完整数"] > 0).sum() / len(user_agg) * 100
         st.markdown(
             f"<div class='insight-box'>💡 {finish_rate_users:.1f}% 的用户有过完整观看行为，"
@@ -421,7 +421,7 @@ def show_user_analysis():
             color_discrete_sequence=["#A78BFA"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         avg_cities = user_agg["观看城市数"].mean()
         st.markdown(
             f"<div class='insight-box'>💡 用户平均观看来自 {avg_cities:.1f} 个城市的作品，"
@@ -444,7 +444,7 @@ def show_user_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab2:
         top_likers = user_agg.nlargest(20, "总点赞数")
@@ -458,7 +458,7 @@ def show_user_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab3:
         top_active = user_agg.nlargest(20, "活跃天数")
@@ -472,7 +472,7 @@ def show_user_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>🌍 用户地理分析</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
@@ -488,13 +488,13 @@ def show_user_analysis():
         )
         fig.update_traces(textinfo="label+value")
         fig.update_layout(height=500)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         st.markdown("### 用户城市分布详情")
         st.dataframe(
             city_user_counts.style.background_gradient(cmap="Viridis", subset=["用户数"]),
-            use_container_width=True, height=500,
+            width='stretch', height=500,
         )
 
     st.markdown("<div class='section-title'>📈 用户行为相关性</div>", unsafe_allow_html=True)
@@ -509,7 +509,7 @@ def show_user_analysis():
     )
     fig.update_traces(marker=dict(size=3))
     fig.update_layout(height=700)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>🔍 用户查询</div>", unsafe_allow_html=True)
     col1, col2 = st.columns([1, 3])
@@ -537,7 +537,7 @@ def show_user_analysis():
                     user_data[["item_id", "author_id", "city_name_item",
                                "like", "finish", "duration_time", "date"]]
                     .head(100),
-                    use_container_width=True,
+                    width='stretch',
                 )
             else:
                 st.warning(f"未找到用户 #{search_uid}")
@@ -577,7 +577,7 @@ def show_author_analysis():
             color_discrete_sequence=["#A78BFA"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         top_10_pct = author_agg["发布作品数"].quantile(0.9)
         st.markdown(
             f"<div class='insight-box'>💡 头部 10% 的作者发布作品数超过 {int(top_10_pct)} 个，"
@@ -594,7 +594,7 @@ def show_author_analysis():
             color_discrete_sequence=["#FF6B6B"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab3:
         author_daily = data.groupby(["author_id", "date"]).size().reset_index(name="count")
@@ -608,7 +608,7 @@ def show_author_analysis():
             color_discrete_sequence=["#4ECDC4"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab4:
         fig = px.histogram(
@@ -619,7 +619,7 @@ def show_author_analysis():
             color_discrete_sequence=["#FFE66D"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         st.markdown(
             f"<div class='insight-box'>💡 作者平均去过 {avg_cities:.1f} 个城市发布作品，"
             f"跨城创作者占比可观</div>",
@@ -643,7 +643,7 @@ def show_author_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab2:
         top_duration = author_agg.nlargest(20, "作品平均时长")
@@ -657,7 +657,7 @@ def show_author_analysis():
         )
         fig.update_traces(texttemplate="%{text}s", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab3:
         top_liked_authors = author_agg.nlargest(20, "总点赞数")
@@ -671,7 +671,7 @@ def show_author_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with tab4:
         top_cities_author = author_agg.nlargest(20, "去过城市数")
@@ -685,7 +685,7 @@ def show_author_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>📈 作者创作分析</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
@@ -700,7 +700,7 @@ def show_author_analysis():
             color_continuous_scale="Viridis",
             hover_data=["author_id"],
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         fig = px.scatter(
@@ -712,7 +712,7 @@ def show_author_analysis():
             color_continuous_scale="Plasma",
             hover_data=["author_id"],
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>📅 作者创作时间分析</div>", unsafe_allow_html=True)
     author_hourly = data.groupby(["author_id", "H"]).size().reset_index(name="count")
@@ -725,7 +725,7 @@ def show_author_analysis():
         markers=True, color_discrete_sequence=["#A78BFA"],
     )
     fig.update_layout(hovermode="x unified")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     peak_hour = author_hourly_avg.loc[author_hourly_avg["count"].idxmax(), "H"]
     st.markdown(
@@ -769,7 +769,7 @@ def show_item_analysis():
             color_discrete_sequence=["#4ECDC4"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         p95 = item_agg["浏览量"].quantile(0.95)
         st.markdown(
             f"<div class='insight-box'>💡 95% 的作品浏览量不超过 {int(p95)} 次，"
@@ -787,7 +787,7 @@ def show_item_analysis():
             color_discrete_sequence=["#FFE66D"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         like_pct = len(liked_items) / len(item_agg) * 100
         st.markdown(
             f"<div class='insight-box'>💡 仅 {like_pct:.1f}% 的作品获得过点赞，"
@@ -804,7 +804,7 @@ def show_item_analysis():
             color_discrete_sequence=["#FF6B6B"],
         )
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         st.markdown(
             f"<div class='insight-box'>💡 作品平均时长 {avg_dur:.1f}s，"
             f"中位数时长 {item_agg['时长'].median():.1f}s，短视频占据主流</div>",
@@ -823,7 +823,7 @@ def show_item_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(showlegend=False, height=500)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>🏙️ 作品城市分析</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
@@ -839,7 +839,7 @@ def show_item_analysis():
         )
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(showlegend=False, height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         city_like_rate = data.groupby("city_name_item")["like"].mean().sort_values(ascending=False).head(15)
@@ -853,7 +853,7 @@ def show_item_analysis():
         )
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(showlegend=False, height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>📈 作品互动分析</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
@@ -870,7 +870,7 @@ def show_item_analysis():
             opacity=0.6,
         )
         fig.update_layout(height=500)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         duration_bins = pd.cut(item_agg["时长"], bins=20)
@@ -889,7 +889,7 @@ def show_item_analysis():
         )
         fig.update_traces(texttemplate="%{text}%", textposition="outside")
         fig.update_layout(xaxis_tickangle=-45, height=500, showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>🎵 音乐影响力分析</div>", unsafe_allow_html=True)
     music_analysis = item_agg.groupby("背景音乐").agg(
@@ -912,7 +912,7 @@ def show_item_analysis():
             color_continuous_scale="Viridis",
             hover_data=["背景音乐"],
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         top_music = music_analysis.nlargest(10, "使用作品数")
@@ -926,7 +926,7 @@ def show_item_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(height=450, showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>🕐 作品发布时间分析</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
@@ -953,7 +953,7 @@ def show_item_analysis():
         )
         fig.update_yaxes(title_text="发布作品数", secondary_y=False)
         fig.update_yaxes(title_text="点赞率(%)", secondary_y=True)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col2:
         data["weekday"] = data["date"].dt.weekday
@@ -975,7 +975,7 @@ def show_item_analysis():
         )
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(showlegend=False, height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>🔍 作品查询</div>", unsafe_allow_html=True)
     col1, col2 = st.columns([1, 3])
@@ -1004,7 +1004,7 @@ def show_item_analysis():
                     item_data[["uid", "author_id", "city_name_user",
                                "like", "finish", "duration_time", "date"]]
                     .head(100),
-                    use_container_width=True,
+                    width='stretch',
                 )
             else:
                 st.warning(f"未找到作品 #{search_item}")
@@ -1023,7 +1023,7 @@ def show_data_explorer():
         rows_to_show = st.slider("显示行数", 100, 10000, 1000, step=100)
     with col2:
         st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("🔄 随机采样", use_container_width=True):
+        if st.button("🔄 随机采样", width='stretch'):
             st.rerun()
 
     display_df = filtered.sample(n=min(rows_to_show, len(filtered)), random_state=42)
@@ -1031,7 +1031,7 @@ def show_data_explorer():
         display_df[["uid", "user_city", "item_id", "author_id", "item_city",
                      "like", "finish", "duration_time", "date", "H"]]
         .style.background_gradient(cmap="Viridis", subset=["like", "finish", "duration_time"]),
-        use_container_width=True, height=500,
+        width='stretch', height=500,
     )
 
     st.markdown("<div class='section-title'>📊 数据统计摘要</div>", unsafe_allow_html=True)
@@ -1039,7 +1039,7 @@ def show_data_explorer():
     with col1:
         st.markdown("### 数值字段描述统计")
         desc_stats = filtered.describe()
-        st.dataframe(desc_stats.style.background_gradient(cmap="Blues"), use_container_width=True)
+        st.dataframe(desc_stats.style.background_gradient(cmap="Blues"), width='stretch')
     with col2:
         st.markdown("### 缺失值检查")
         missing = pd.DataFrame({
@@ -1050,7 +1050,7 @@ def show_data_explorer():
         })
         st.dataframe(
             missing.style.background_gradient(cmap="Reds", subset=["缺失率(%)"]),
-            use_container_width=True,
+            width='stretch',
         )
 
     st.markdown("<div class='section-title'>📈 数据相关性热力图</div>", unsafe_allow_html=True)
@@ -1064,7 +1064,7 @@ def show_data_explorer():
         labels={"color": "相关系数"},
     )
     fig.update_layout(height=400)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     st.markdown("<div class='section-title'>⬇️ 数据下载</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
@@ -1075,7 +1075,7 @@ def show_data_explorer():
             data=csv,
             file_name="douyin_sample.csv",
             mime="text/csv",
-            use_container_width=True,
+            width='stretch',
         )
     with col2:
         st.markdown(
